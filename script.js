@@ -14,19 +14,10 @@ const bands = [
 	'An Old Dog',
 ]
 
-const word = 'The'
-
-const sortByAlphabeth = () => {
-	bands.forEach(item => {
-		const startIndex = item.indexOf(word)
-
-		if (startIndex !== -1) {
-			const endIndex = startIndex + word.length
-			const withoutThe = item.slice(0, startIndex) + item.slice(endIndex)
-            console.log(withoutThe);
-		}
-        
-	})
+function strip(bandName) {
+	return bandName.replace(/^(a |the |an )/i, '').trim()
 }
 
-sortByAlphabeth()
+const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1))
+
+document.querySelector('#bands').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('')
