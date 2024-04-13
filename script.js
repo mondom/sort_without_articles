@@ -14,6 +14,27 @@ const bands = [
 	'An Old Dog',
 ]
 
+const list = document.querySelector('#bands')
+
+const regex = /^(the |a |an )/i
+
+const ignore = item => {
+	return item.replace(regex, '').trim()
+}
+
+const newArr = bands.sort(function (a, b) {
+	if (ignore(a) > ignore(b)) {
+		return 1
+	} else {
+		return -1
+	}
+})
+
+console.log(newArr)
+
+
+list.innerHTML = newArr.map(band => `<li>${band}</li>`).join('')
+
 // function strip(bandName) {
 // 	return bandName.replace(/^(a |the |an )/i, '').trim()
 // }
@@ -30,21 +51,21 @@ const bands = [
 // Wybieramy element z dokumentu o identyfikatorze bands za pomocą document.querySelector('#bands') i ustawiamy jego innerHTML na listę posortowanych zespołów muzycznych. Do tego celu wykorzystujemy metodę map(), aby stworzyć listę elementów <li> zawierających nazwy zespołów, a następnie łączymy je w jedną długi ciąg znaków za pomocą metody join('').
 // Ogólnie rzecz biorąc, ten kod usuwa przedrostki "a", "the" lub "an" z nazw zespołów muzycznych, sortuje je alfabetycznie i wyświetla posortowaną listę na stronie internetowej.
 
-const sort = nameItem => {
-	return nameItem.replace(/^(a |the |an )/i, '').trim()
-}
+// const sort = nameItem => {
+// 	return nameItem.replace(/^(a |the |an )/i, '').trim()
+// }
 // pod nameItem jest podstawiana każda nazwa z tablicy bands(patrz wywołanie w metodzie sort poniżej) i słowa z wyrażenia regularnego są zastępowane pustym stringiem. Metoda trim usuwa białe znaki.
 
-const sortedBans = bands.sort((a, b) => {
-	if (sort(a) > sort(b)) {
-		return 1
-	} else {
-		return -1
-	}
-})
-// ↑ To jest sortowanie alfabetyczne tablicy. Wynik zwrócony większy od zera przesunie item w górę, a mniejszy od zera w dół.
-console.log(sortedBans)
+// const sortedBans = bands.sort((a, b) => {
+// 	if (sort(a) > sort(b)) {
+// 		return 1
+// 	} else {
+// 		return -1
+// 	}
+// })
+// // ↑ To jest sortowanie alfabetyczne tablicy. Wynik zwrócony większy od zera przesunie item w górę, a mniejszy od zera w dół.
+// console.log(sortedBans)
 
-const list = document.querySelector('#bands')
+// const list = document.querySelector('#bands')
 
-list.innerHTML = sortedBans.map(band => `<li>${band}</li>`).join('')
+// list.innerHTML = sortedBans.map(band => `<li>${band}</li>`).join('')
